@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/receive_message_bg"
+        android:layout_marginStart="65dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/rl_receive_message">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello john what are you going to do this weekend"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/message"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/message"
+            android:text="17:45"
+            android:layout_marginStart="15dp"
+            android:textColor="#AFAFAF"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:id="@+id/time"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@id/time"/>
+    </RelativeLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/screen6_dp"
+        android:layout_alignBottom="@id/rl_receive_message"
+        android:layout_marginStart="10dp"/>
+
+</RelativeLayout>

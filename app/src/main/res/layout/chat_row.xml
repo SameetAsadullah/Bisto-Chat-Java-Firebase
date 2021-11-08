@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1C1B1B"
+    android:id="@+id/rl_chat">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/screen6_dp"
+        android:id="@+id/dp"
+        android:layout_marginStart="10dp"
+        android:layout_centerVertical="true"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:src="#0FDB66"
+        android:layout_marginStart="10dp"
+        android:layout_alignEnd="@+id/dp"
+        android:layout_alignBottom="@+id/dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:alpha="0"
+        android:id="@+id/online_status"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:src="#007EF4"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:alpha="0"
+        android:id="@+id/read_status"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Janet Fowler" />
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:textColor="#C3C3C3"
+            tools:text="I'm going to San Francisco ..." />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="#C3C3C3"
+            tools:text="now" />
+    </RelativeLayout>
+</RelativeLayout>

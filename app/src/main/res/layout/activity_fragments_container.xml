@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragmentsContainer"
+    android:orientation="vertical"
+    android:layout_weight="10"
+    android:background="#1C1B1B">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/container"
+        android:layout_weight="8.8"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rectangle_top_curved"
+        android:backgroundTint="#1F1F1F"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:id="@+id/bottom_bar"
+        android:layout_weight="1.2">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:layout_marginTop="29dp">
+
+            <ImageView
+                android:id="@+id/calls_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/call_icon"
+                android:backgroundTint="#696969" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:layout_marginTop="22dp">
+
+            <ImageView
+                android:id="@+id/camera_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/camera_icon"
+                android:backgroundTint="#696969" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/messages_image"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/message_icon"
+                android:backgroundTint="#0765BE" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/contacts_image"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/people_icon"
+                android:backgroundTint="#696969" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
