@@ -1,5 +1,6 @@
 package com.sameetasadullah.i180479_180531;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -27,11 +28,12 @@ public class screen2 extends AppCompatActivity {
         setContentView(R.layout.activity_screen2);
 
         ActivityCompat.requestPermissions(screen2.this,
-                new String[]{Manifest.permission.READ_CONTACTS}, 1);
-
-//        if(this.getApplicationContext().checkSelfPermission(
-//            Manifest.permission.READ_CONTACTS ) == PackageManager.PERMISSION_GRANTED ) {
-//        }
+                new String[]{
+                        Manifest.permission.READ_CONTACTS,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.INTERNET
+                }, 1);
 
         register = findViewById(R.id.register);
         email = findViewById(R.id.et_email_address);
@@ -66,6 +68,5 @@ public class screen2 extends AppCompatActivity {
                 }
             }
         });
-
     }
 }
