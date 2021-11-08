@@ -34,13 +34,13 @@ public class fragment_screen4 extends Fragment {
 
         recyclerView = view.findViewById(R.id.rv_chats);
 
-        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(getActivity(),new String[]{
-                    Manifest.permission.CAMERA
-            },100);
-
-        }
+//        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+//                != PackageManager.PERMISSION_GRANTED){
+//            ActivityCompat.requestPermissions(getActivity(),new String[]{
+//                    Manifest.permission.CAMERA
+//            },100);
+//
+//        }
 
         DBHelper dbHelper = new DBHelper(getActivity());
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
