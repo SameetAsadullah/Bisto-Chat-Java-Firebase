@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/rl_receive_image"
+        android:background="@drawable/receive_image_bg">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:id="@+id/image"
+            android:background="#1C1B1B"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:text="now"
+            android:layout_marginStart="15dp"
+            android:textColor="#AFAFAF"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp"
+            android:id="@+id/time"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:text="●"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:textColor="#AFAFAF"
+            android:layout_toEndOf="@+id/time"
+            android:textSize="12sp"
+            android:id="@+id/round_circle"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:text="San Francisco"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:textColor="#AFAFAF"
+            android:layout_toEndOf="@+id/round_circle"
+            android:textSize="12sp"
+            android:id="@+id/location"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@id/time"/>
+    </RelativeLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/screen6_dp"
+        android:layout_alignBottom="@id/rl_receive_message"
+        android:layout_marginStart="10dp"/>
+
+</RelativeLayout>
