@@ -56,3 +56,5 @@ public class message {
 
     public void setLocation(String location) { this.location = location; }
 }
+
+//CHange#1
