@@ -15,12 +15,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class screen2 extends AppCompatActivity {
     TextView register;
     EditText email, password;
     RelativeLayout rl_login_button;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +44,7 @@ public class screen2 extends AppCompatActivity {
         email = findViewById(R.id.et_email_address);
         password = findViewById(R.id.et_password);
         rl_login_button = findViewById(R.id.rl_login_button);
-
-        sharedPreferences = getSharedPreferences("com.sameetasadullah.i180479_180531", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        mAuth = FirebaseAuth.getInstance();
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,17 +57,30 @@ public class screen2 extends AppCompatActivity {
         rl_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (email.getText().toString().equals("smd") &&
-                        password.getText().toString().equals("smd")) {
-                    editor.putBoolean("loggedIn", true);
-                    editor.commit();
-                    editor.apply();
-
-                    Intent intent = new Intent(screen2.this, fragmentsContainer.class);
-                    startActivity(intent);
-                    finish();
+                if (!email.getText().toString().isEmpty() &&
+                        !password.getText().toString().isEmpty()) {
+                    mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(screen2.this, fragmentsContainer.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(screen2.this, "SignIn Error Occurred", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(screen2.this, "SignIn Error Occurred", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                    ;
                 } else {
-                    Toast.makeText(screen2.this, "Please enter correct input", Toast.LENGTH_LONG).show();
+                    Toast.makeText(screen2.this, "Please fill all input fields", Toast.LENGTH_LONG).show();
                 }
             }
         });

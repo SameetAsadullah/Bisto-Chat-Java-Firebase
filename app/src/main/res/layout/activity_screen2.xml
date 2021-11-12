@@ -47,7 +47,8 @@
                 android:hint="Email Address"
                 android:textColor="#808080"
                 android:textColorHint="#808080"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:inputType="textEmailAddress"/>
 
             <EditText
                 android:id="@+id/et_password"

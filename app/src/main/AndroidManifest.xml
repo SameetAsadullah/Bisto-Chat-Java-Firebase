@@ -16,7 +16,8 @@
         android:theme="@style/Theme.I180479_180531">
         <activity
             android:name=".inputCredentials"
-            android:exported="true" />
+            android:exported="true" >
+        </activity>
         <activity
             android:name=".fragmentsContainer"
             android:exported="true" />
