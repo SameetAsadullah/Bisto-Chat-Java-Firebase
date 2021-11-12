@@ -47,20 +47,21 @@
                 android:hint="Email Address"
                 android:textColor="#808080"
                 android:textColorHint="#808080"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:inputType="textEmailAddress"/>
 
             <EditText
-                android:layout_marginTop="5dp"
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_below="@+id/et_email_address"
+                android:layout_marginTop="5dp"
                 android:backgroundTint="#2F2E2E"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:textColor="#808080"
                 android:textColorHint="#808080"
-                android:textSize="14sp"
-                android:inputType="textPassword"/>
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/et_confirm_password"

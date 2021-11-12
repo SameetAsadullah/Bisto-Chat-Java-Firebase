@@ -62,11 +62,16 @@ public class screen3 extends AppCompatActivity {
                     mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                public void onComplete(@NonNull Task< AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         Intent intent = new Intent(screen3.this, inputCredentials.class);
+                                        intent.putExtra("email", email.getText().toString());
+                                        intent.putExtra("password", password.getText().toString());
+                                        intent.putExtra("id", mAuth.getCurrentUser().getUid());
                                         startActivity(intent);
                                         finish();
+                                    } else {
+                                        Toast.makeText(screen3.this, "Failed to Create User", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             })
@@ -80,14 +85,5 @@ public class screen3 extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null) {
-            Toast.makeText(screen3.this, user.getUid() + "", Toast.LENGTH_LONG).show();
-        }
     }
 }
