@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/add_photo.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/add_photo_icon.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/custom_shape_rectangle.xml" value="0.2462962962962963" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/custom_shape_rectangle_1.xml" value="0.26615384615384613" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/custom_shape_rectangle_2.xml" value="0.26615384615384613" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/frame.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/gradient.xml" value="0.2462962962962963" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/gradient1.xml" value="0.26615384615384613" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/gradient2.xml" value="0.26615384615384613" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/gradient_gray.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/left_message_bg.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/line.xml" value="0.2462962962962963" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/people_icon.xml" value="0.26615384615384613" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/receive_image_bg.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/rectangle_bottom_curved.xml" value="0.26615384615384613" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/rectangle_curved.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/rectangle_curved_screen5.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/rectangle_curved_screen6.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/rectangle_top_curved.xml" value="0.26615384615384613" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/right_message_background.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/right_message_bg.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/search_icon.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/drawable/send_image_bg.xml" value="0.2703125" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_fragments_container.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_input_credentials.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_screen1.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_screen10.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_screen11.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_screen2.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_screen3.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_screen4.xml" value="0.23981481481481481" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_screen5.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_screen6.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/activity_screen8.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/call_made_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/call_received_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/call_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/chat_row.xml" value="0.25025641025641027" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/contact_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/fragment_screen10.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/fragment_screen4.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/fragment_screen6.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/left_message_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/outgoing_message.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/receive_image_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/receive_message_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/recent_contact_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/right_message_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/send_image_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 2/i180479_180531/app/src/main/res/layout/send_message_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 3/i180479_180531/app/src/main/res/layout/activity_input_credentials.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 3/i180479_180531/app/src/main/res/layout/activity_screen2.xml" value="0.25416666666666665" />
+        <entry key="..\:/Uniii/Semester-VII/SMD/Assignments/Assignment 3/i180479_180531/app/src/main/res/layout/activity_screen3.xml" value="0.25416666666666665" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
