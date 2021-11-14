@@ -41,9 +41,11 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.OffsetTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class screen5 extends ScreenshotDetectionActivity {
@@ -55,10 +57,12 @@ public class screen5 extends ScreenshotDetectionActivity {
     EditText message;
     Bitmap image = null;
     FirebaseDatabase database;
-    DatabaseReference myRef;
+    DatabaseReference myRef, myRef1;
     String receiverID;
     FirebaseAuth mAuth;
     StorageReference storageReference;
+    Account receiverAccount;
+    boolean minimized = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,7 @@ public class screen5 extends ScreenshotDetectionActivity {
         cameraImage = findViewById(R.id.camera_image);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Messages");
+        myRef1 = database.getReference("Accounts");
         mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("Images");
         messageList = new ArrayList<>();
@@ -81,13 +86,56 @@ public class screen5 extends ScreenshotDetectionActivity {
         Intent intent = getIntent();
         name.setText(intent.getStringExtra("name"));
         receiverID = intent.getStringExtra("receiverID");
-//        if (intent.getIntExtra("onlineStatus", 0) == 1) {
-//            onlineStatus.setAlpha((float)1);
-//        }
         image = (Bitmap) intent.getExtras().get("image");
         if (image != null) {
             insertImageMessageIntoFirebase();
         }
+
+        myRef1.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Account firebaseAccount = snapshot.getValue(Account.class);
+                if (firebaseAccount.getID().equals(receiverID)) {
+                    receiverAccount = firebaseAccount;
+
+                    if (receiverAccount.getState().equals("online")) {
+                        onlineStatus.setText("Online now");
+                    } else {
+                        onlineStatus.setText("Last seen on " + receiverAccount.getLastSeenDate() + " " + receiverAccount.getLastSeenTime());
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Account firebaseAccount = snapshot.getValue(Account.class);
+
+                if (firebaseAccount.getID().equals(receiverID)) {
+                    receiverAccount = firebaseAccount;
+
+                    if (receiverAccount.getState().equals("online")) {
+                        onlineStatus.setText("Online now");
+                    } else {
+                        onlineStatus.setText("Last seen on " + receiverAccount.getLastSeenDate() + " " + receiverAccount.getLastSeenTime());
+                    }
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -127,6 +175,7 @@ public class screen5 extends ScreenshotDetectionActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                minimized = false;
                 finish();
             }
         });
@@ -135,6 +184,7 @@ public class screen5 extends ScreenshotDetectionActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(screen5.this, screen11.class);
                 intent.putExtra("name", name.getText().toString());
+                minimized = false;
                 startActivity(intent);
             }
         });
@@ -168,6 +218,8 @@ public class screen5 extends ScreenshotDetectionActivity {
         recyclerView.setAdapter(adaptor);
         recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(70));
         recyclerView.scrollToPosition(messageList.size() - 1);
+
+        updateUserStatus("online");
     }
 
     private void insertImageMessageIntoFirebase() {
@@ -228,64 +280,57 @@ public class screen5 extends ScreenshotDetectionActivity {
         Toast.makeText(this, "Please grant read external storage permission for screenshot detection", Toast.LENGTH_SHORT).show();
     }
 
-//    private double insertMessageIntoDatabase(String toString) {
-//        DBHelper dbHelper = new DBHelper(screen5.this);
-//        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-//        ContentValues cv = new ContentValues();
-//        cv.put(chatsContract.Chats._SENDER_NAME, "John");
-//        cv.put(chatsContract.Chats._RECEIVER_NAME, name.getText().toString());
-//        cv.put(chatsContract.Chats._MESSAGE, message.getText().toString());
-//        cv.put(chatsContract.Chats._TIME, "now");
-//        double result = sqLiteDatabase.insert(chatsContract.Chats.TABLENAME, null, cv);
-//        if (result == -1) {
-//            System.out.println("Insertion query failed");
-//        } else {
-//            System.out.println("Insertion query passed");
-//        }
-//        sqLiteDatabase.close();
-//        dbHelper.close();
-//        return result;
-//    }
-//
-//    private void getDataFromDB() {
-//        DBHelper dbHelper = new DBHelper(screen5.this);
-//        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-//        String[] projection = new String[] {
-//                chatsContract.Chats._ID,
-//                chatsContract.Chats._SENDER_NAME,
-//                chatsContract.Chats._RECEIVER_NAME,
-//                chatsContract.Chats._MESSAGE,
-//                chatsContract.Chats._TIME
-//        };
-//
-//        messageList.clear();
-//        Cursor cursor = sqLiteDatabase.query(chatsContract.Chats.TABLENAME, projection, null,
-//                null, null, null, null);
-//        while (cursor.moveToNext()) {
-//            int index = cursor.getColumnIndex(chatsContract.Chats._SENDER_NAME);
-//            String senderName = cursor.getString(index);
-//            index = cursor.getColumnIndex(chatsContract.Chats._RECEIVER_NAME);
-//            String receiverName = cursor.getString(index);
-//
-//            if ((senderName.equals("John") && receiverName.equals(name.getText().toString())) ||
-//                    (senderName.equals(name.getText().toString()) && receiverName.equals("John"))) {
-//                index = cursor.getColumnIndex(chatsContract.Chats._ID);
-//                String id = cursor.getString(index);
-//                index = cursor.getColumnIndex(chatsContract.Chats._MESSAGE);
-//                String message = cursor.getString(index);
-//                index = cursor.getColumnIndex(chatsContract.Chats._TIME);
-//                String time = cursor.getString(index);
-//
-//                if (senderName.equals("John")) {
-//                    messageList.add(new message(message, time, "", id, true, null));
-//                } else {
-//                    messageList.add(new message(message, time, "", id, false, null));
-//                }
-//            }
-//        }
-//
-//        if (image != null) {
-//            messageList.add(new message("", "now", "San Francisco", "-1", true, image));
-//        }
-//    }
+    private void updateUserStatus(String state) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Accounts");
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String saveCurrentDate, saveCurrentTime;
+
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+
+        Calendar calForTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+        saveCurrentTime = currentTime.format(calForTime.getTime());
+
+        reference.child(auth.getUid()).child("state").setValue(state);
+        reference.child(auth.getUid()).child("lastSeenTime").setValue(saveCurrentTime);
+        reference.child(auth.getUid()).child("lastSeenDate").setValue(saveCurrentDate);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        minimized = false;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        updateUserStatus("online");
+        minimized = true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUserStatus("online");
+        minimized = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (minimized) {
+            updateUserStatus("offline");
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (minimized) {
+            updateUserStatus("offline");
+        }
+    }
 }

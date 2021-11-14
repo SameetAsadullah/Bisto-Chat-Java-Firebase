@@ -41,13 +41,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Online now"
                 android:textSize="12dp"
                 android:textColor="#6E6E6E"
                 android:layout_below="@id/name"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/online_status"
-                android:alpha="0"/>
+                android:id="@+id/online_status" />
         </RelativeLayout>
 
         <ImageView

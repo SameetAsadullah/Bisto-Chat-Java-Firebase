@@ -12,7 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class fragment_screen10 extends Fragment {
@@ -35,7 +41,7 @@ public class fragment_screen10 extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        adaptor = new screen10RVAdaptor(getActivity(), callList);
+        adaptor = new screen10RVAdaptor(getActivity(), callList, fragment_screen10.this);
         recyclerView.setAdapter(adaptor);
         recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(70));
 
@@ -46,5 +52,9 @@ public class fragment_screen10 extends Fragment {
     public void onResume() {
         super.onResume();
         ((fragmentsContainer)getActivity()).changeImageColorToBlue(2);
+    }
+
+    public void applicationNotMinimized() {
+        ((fragmentsContainer)getActivity()).minimized = false;
     }
 }

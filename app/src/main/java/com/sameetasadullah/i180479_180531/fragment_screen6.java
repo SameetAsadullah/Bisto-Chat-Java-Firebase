@@ -21,13 +21,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class fragment_screen6 extends Fragment {
@@ -37,6 +40,7 @@ public class fragment_screen6 extends Fragment {
     RelativeLayout newContact, newGroup;
     List<Account> accounts;
     DatabaseReference myRef;
+    FirebaseAuth mAuth;
 
     @Nullable
     @Override
@@ -48,6 +52,7 @@ public class fragment_screen6 extends Fragment {
         newGroup = view.findViewById(R.id.rl_new_group);
         accounts = new ArrayList<>();
         myRef = FirebaseDatabase.getInstance().getReference("Accounts");
+        mAuth = FirebaseAuth.getInstance();
 
         contactList = new ArrayList<>();
 
@@ -83,7 +88,7 @@ public class fragment_screen6 extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        adaptor = new screen6RVAdaptor(getActivity(), contactList);
+        adaptor = new screen6RVAdaptor(getActivity(), contactList, fragment_screen6.this);
         recyclerView.setAdapter(adaptor);
         recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(50));
 
@@ -104,46 +109,38 @@ public class fragment_screen6 extends Fragment {
     }
 
     private void addPhoneContactsToList() {
-        ContentResolver cr = getActivity().getContentResolver();
-        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
-                null, null, null, null);
+        ContentResolver contentResolver = getActivity().getContentResolver();
+        Cursor phones=contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,null);
+        String phoneNo;
+        while (phones.moveToNext()) {
+            int index = phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+            phoneNo = phones.getString(index).replace("+92","0");
 
-        if ((cur != null ? cur.getCount() : 0) > 0) {
-            while (cur != null && cur.moveToNext()) {
-                int index = cur.getColumnIndex(ContactsContract.Contacts._ID);
-                String id = cur.getString(index);
-                index = cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-                String name = cur.getString(index);
+            if (phoneNo.charAt(4) == ' ') {
+                StringBuilder stringBuilder = new StringBuilder(phoneNo);
+                stringBuilder.deleteCharAt(4);
+                phoneNo = stringBuilder.toString();
+            }
 
-                index = cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER);
-                if (cur.getInt(index) > 0) {
-                    Cursor pCur = cr.query(
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                            null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                            new String[]{id}, null);
-                    while (pCur.moveToNext()) {
-                        index = pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-                        String phoneNo = pCur.getString(index);
-                        for (int i = 0; i < accounts.size(); ++i) {
-                            if (accounts.get(i).getPhoneNumber().equals(phoneNo)) {
-                                contactList.add(new contact(name, phoneNo));
-                                break;
-                            }
-                        }
-                    }
-                    pCur.close();
+            for (int i = 0; i < accounts.size(); ++i) {
+                if (accounts.get(i).getPhoneNumber().equals(phoneNo) && !accounts.get(i).getID().equals(mAuth.getUid())) {
+                    contactList.add(new contact(accounts.get(i).getFirstName() + " " +
+                            accounts.get(i).getLastName(), phoneNo));
+                    break;
                 }
             }
         }
-        if(cur!=null){
-            cur.close();
-        }
+
+        phones.close();
     }
-    
+
     @Override
     public void onResume() {
         super.onResume();
         ((fragmentsContainer)getActivity()).changeImageColorToBlue(1);
+    }
+
+    public void applicationNotMinimized() {
+        ((fragmentsContainer)getActivity()).minimized = false;
     }
 }
