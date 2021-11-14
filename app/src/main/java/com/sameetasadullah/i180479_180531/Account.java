@@ -1,9 +1,11 @@
 package com.sameetasadullah.i180479_180531;
 
 public class Account {
-    String ID, email, password, firstName, lastName, gender, bio, dp;
+    String ID, email, password, firstName, lastName, gender, bio, dp, phoneNumber;
 
-    public Account(String ID, String email, String password, String firstName, String lastName, String gender, String bio, String dp) {
+    public Account(){}
+
+    public Account(String ID, String email, String password, String firstName, String lastName, String gender, String bio, String dp, String phoneNumber) {
         this.ID = ID;
         this.email = email;
         this.password = password;
@@ -12,6 +14,7 @@ public class Account {
         this.gender = gender;
         this.bio = bio;
         this.dp = dp;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getID() {
@@ -76,5 +79,13 @@ public class Account {
 
     public void setDp(String dp) {
         this.dp = dp;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

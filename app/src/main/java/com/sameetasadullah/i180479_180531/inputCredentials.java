@@ -31,7 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class inputCredentials extends AppCompatActivity {
     public static final int PICK_IMAGE = 1;
-    EditText firstName, lastName, bio;
+    EditText firstName, lastName, bio, phoneNumber;
     Button create;
     ImageView addDisplayPic;
     CircleImageView dp;
@@ -55,6 +55,7 @@ public class inputCredentials extends AppCompatActivity {
         create = findViewById(R.id.create);
         addDisplayPic = findViewById(R.id.add_display_pic);
         dp = findViewById(R.id.display_pic);
+        phoneNumber = findViewById(R.id.phoneNumber);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Accounts");
         storageReference = FirebaseStorage.getInstance().getReference("DPs");
@@ -99,7 +100,8 @@ public class inputCredentials extends AppCompatActivity {
                                                                 lastName.getText().toString(),
                                                                 genderRadioButton.getText().toString(),
                                                                 bio.getText().toString(),
-                                                                dp
+                                                                dp,
+                                                                phoneNumber.getText().toString()
                                                         )
                                                 );
                                                 Intent intent = new Intent(inputCredentials.this, fragmentsContainer.class);

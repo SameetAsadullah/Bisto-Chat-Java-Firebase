@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -35,6 +38,7 @@ public class screen4RVAdaptor extends RecyclerView.Adapter<screen4RVAdaptor.scre
         holder.name.setText(chatList.get(position).getName());
         holder.message.setText(chatList.get(position).getMessage());
         holder.time.setText(chatList.get(position).getTime());
+        Picasso.get().load(chatList.get(position).getDp()).into(holder.dp);
 
         if (chatList.get(position).getOnline()) {
             holder.online_status.setAlpha((float)1);
@@ -48,6 +52,7 @@ public class screen4RVAdaptor extends RecyclerView.Adapter<screen4RVAdaptor.scre
             public void onClick(View view) {
                 Intent intent = new Intent(context, screen5.class);
                 intent.putExtra("name", holder.name.getText().toString());
+                intent.putExtra("receiverID", chatList.get(holder.getAdapterPosition()).getId());
                 if (chatList.get(holder.getAdapterPosition()).getOnline()) {
                     intent.putExtra("onlineStatus", 1);
                 }
@@ -64,7 +69,7 @@ public class screen4RVAdaptor extends RecyclerView.Adapter<screen4RVAdaptor.scre
     public class screen4ViewHolder extends RecyclerView.ViewHolder{
         TextView name, message, time;
         RelativeLayout rl_chat;
-        CircleImageView online_status, read_status;
+        CircleImageView online_status, read_status, dp;
 
         public screen4ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +79,7 @@ public class screen4RVAdaptor extends RecyclerView.Adapter<screen4RVAdaptor.scre
             rl_chat = itemView.findViewById(R.id.rl_chat);
             online_status = itemView.findViewById(R.id.online_status);
             read_status = itemView.findViewById(R.id.read_status);
+            dp = itemView.findViewById(R.id.dp);
         }
     }
 }

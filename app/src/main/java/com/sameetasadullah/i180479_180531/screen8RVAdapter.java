@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,6 @@ public class screen8RVAdapter extends RecyclerView.Adapter<screen8RVAdapter.scre
 
     @Override
     public int getItemCount() {
-
         return ls.size();
     }
 

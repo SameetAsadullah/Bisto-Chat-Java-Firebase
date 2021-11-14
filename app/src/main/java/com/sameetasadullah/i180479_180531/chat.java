@@ -1,16 +1,25 @@
 package com.sameetasadullah.i180479_180531;
 
 public class chat {
-    private String id, name, message, time;
+    private String id, name, message, time, dp;
     private Boolean isOnline, isRead;
 
-    public chat(String id, String name, String message, String time, Boolean isOnline, Boolean isRead) {
+    public chat(String id, String name, String message, String time, Boolean isOnline, Boolean isRead, String dp) {
         this.id = id;
         this.name = name;
         this.message = message;
         this.time = time;
         this.isOnline = isOnline;
         this.isRead = isRead;
+        this.dp = dp;
+    }
+
+    public String getDp() {
+        return dp;
+    }
+
+    public void setDp(String dp) {
+        this.dp = dp;
     }
 
     public String getId() {

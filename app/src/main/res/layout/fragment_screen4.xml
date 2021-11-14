@@ -22,9 +22,13 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentBottom="true"
-            android:layout_margin="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/new_message_icon"
-            android:backgroundTint="#696969" />
+            android:backgroundTint="#696969"
+            android:id="@+id/new_message"/>
 
         <ImageView
             android:layout_width="30dp"

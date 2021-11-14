@@ -5,25 +5,42 @@ import android.graphics.Bitmap;
 import java.util.List;
 
 public class message {
-    private String message, time, location, ID, receiverName;
-    private Boolean isSent;
-    private Bitmap image;
+    private String message, time, location, key, receiverID, senderID, image;
 
-    public message(String message, String time, String location, String ID, Boolean isSent, Bitmap image) {
+    public message() {}
+
+    public message(String message, String time, String location, String key, String receiverID, String senderID, String image) {
         this.message = message;
         this.time = time;
         this.location = location;
-        this.ID = ID;
-        this.isSent = isSent;
+        this.key = key;
+        this.receiverID = receiverID;
+        this.senderID = senderID;
         this.image = image;
     }
 
-    public String getID() {
-        return ID;
+    public String getReceiverID() {
+        return receiverID;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setReceiverID(String receiverID) {
+        this.receiverID = receiverID;
+    }
+
+    public String getSenderID() {
+        return senderID;
+    }
+
+    public void setSenderID(String senderID) {
+        this.senderID = senderID;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String ID) {
+        this.key = ID;
     }
 
     public String getMessage() {
@@ -42,15 +59,9 @@ public class message {
         this.time = time;
     }
 
-    public Boolean getSent() { return isSent; }
+    public String getImage() { return image; }
 
-    public void setSent(Boolean sent) {
-        isSent = sent;
-    }
-
-    public Bitmap getImage() { return image; }
-
-    public void setImage(Bitmap image) { this.image = image; }
+    public void setImage(String image) { this.image = image; }
 
     public String getLocation() { return location; }
 

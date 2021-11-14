@@ -17,6 +17,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -24,10 +27,12 @@ import java.util.List;
 public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     List<message> messageList;
+    FirebaseAuth mAuth;
 
     public screen5RVAdaptor(Context context, List<message> messageList) {
         this.context = context;
         this.messageList = messageList;
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @NonNull
@@ -79,7 +84,7 @@ public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
                             SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
                             sqLiteDatabase.delete(chatsContract.Chats.TABLENAME,
                                     chatsContract.Chats._ID+"= ?",
-                                    new String[]{messageList.get(holder.getAdapterPosition()).getID()});
+                                    new String[]{messageList.get(holder.getAdapterPosition()).getKey()});
                             messageList.remove(holder.getAdapterPosition());
                             notifyDataSetChanged();
                         }
@@ -94,7 +99,7 @@ public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
                             cv.put(chatsContract.Chats._MESSAGE, text);
                             sqLiteDatabase.update(chatsContract.Chats.TABLENAME, cv,
                                     chatsContract.Chats._ID+"= ?",
-                                    new String[]{messageList.get(holder.getAdapterPosition()).getID()});
+                                    new String[]{messageList.get(holder.getAdapterPosition()).getKey()});
                             messageList.get(holder.getAdapterPosition()).setMessage(text);
                             notifyDataSetChanged();
                         }
@@ -118,24 +123,24 @@ public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
         else if (holder instanceof screen5SendImageViewHolder) {
             ((screen5SendImageViewHolder)holder).time.setText(messageList.get(position).getTime());
             ((screen5SendImageViewHolder)holder).location.setText(messageList.get(position).getLocation());
-            ((screen5SendImageViewHolder)holder).image.setImageBitmap(messageList.get(position).getImage());
+            Picasso.get().load(messageList.get(position).getImage()).into(((screen5SendImageViewHolder)holder).image);
         }
         else if (holder instanceof screen5ReceiveImageViewHolder) {
             ((screen5ReceiveImageViewHolder)holder).time.setText(messageList.get(position).getTime());
             ((screen5ReceiveImageViewHolder)holder).location.setText(messageList.get(position).getLocation());
-            ((screen5ReceiveImageViewHolder)holder).image.setImageBitmap(messageList.get(position).getImage());
+            Picasso.get().load(messageList.get(position).getImage()).into(((screen5ReceiveImageViewHolder)holder).image);
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (messageList.get(position).getSent() && messageList.get(position).getImage() == null) {
+        if (messageList.get(position).getSenderID().equals(mAuth.getUid()) && messageList.get(position).getImage() == null) {
             return R.layout.send_message_row;
         }
-        else if (messageList.get(position).getSent() && messageList.get(position).getImage() != null) {
+        else if (messageList.get(position).getSenderID().equals(mAuth.getUid()) && messageList.get(position).getImage() != null) {
             return R.layout.send_image_row;
         }
-        else if (!messageList.get(position).getSent() && messageList.get(position).getImage() == null) {
+        else if (messageList.get(position).getReceiverID().equals(mAuth.getUid()) && messageList.get(position).getImage() == null) {
             return R.layout.receive_message_row;
         }
         else {
