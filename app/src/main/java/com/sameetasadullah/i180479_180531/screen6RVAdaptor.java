@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,10 +31,12 @@ public class screen6RVAdaptor extends RecyclerView.Adapter<screen6RVAdaptor.scre
     FirebaseDatabase database;
     DatabaseReference myRef;
     List<Account> accounts;
+    fragment_screen6 fragment;
 
-    public screen6RVAdaptor(Context context, List<contact> contactList) {
+    public screen6RVAdaptor(Context context, List<contact> contactList, fragment_screen6 fragment) {
         this.context = context;
         this.contactList = contactList;
+        this.fragment = fragment;
         database = FirebaseDatabase.getInstance();
         accounts = new ArrayList<>();
         myRef = database.getReference("Accounts");
@@ -85,6 +88,7 @@ public class screen6RVAdaptor extends RecyclerView.Adapter<screen6RVAdaptor.scre
                         Intent intent = new Intent(context, screen5.class);
                         intent.putExtra("name", accounts.get(i).getFirstName() + " " + accounts.get(i).getLastName());
                         intent.putExtra("receiverID", accounts.get(i).getID());
+                        fragment.applicationNotMinimized();
                         context.startActivity(intent);
                     }
                 }

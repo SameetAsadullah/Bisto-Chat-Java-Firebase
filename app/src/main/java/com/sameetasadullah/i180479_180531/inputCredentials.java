@@ -93,7 +93,7 @@ public class inputCredentials extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(Uri uri) {
                                                 String dp = uri.toString();
-                                                myRef.push().setValue(
+                                                myRef.child(ID).setValue(
                                                         new Account(
                                                                 ID, email, password,
                                                                 firstName.getText().toString(),
@@ -101,7 +101,8 @@ public class inputCredentials extends AppCompatActivity {
                                                                 genderRadioButton.getText().toString(),
                                                                 bio.getText().toString(),
                                                                 dp,
-                                                                phoneNumber.getText().toString()
+                                                                phoneNumber.getText().toString(),
+                                                                "", "", ""
                                                         )
                                                 );
                                                 Intent intent = new Intent(inputCredentials.this, fragmentsContainer.class);

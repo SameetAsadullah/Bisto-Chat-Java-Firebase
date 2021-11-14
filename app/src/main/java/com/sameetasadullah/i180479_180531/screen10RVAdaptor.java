@@ -18,10 +18,12 @@ import java.util.List;
 public class screen10RVAdaptor extends RecyclerView.Adapter<screen10RVAdaptor.screen10ViewHolder> {
     Context context;
     List<call> callList = new ArrayList<>();
+    fragment_screen10 fragment;
 
-    public screen10RVAdaptor(Context context, List<call> callList) {
+    public screen10RVAdaptor(Context context, List<call> callList, fragment_screen10 fragment) {
         this.context = context;
         this.callList = callList;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -48,6 +50,7 @@ public class screen10RVAdaptor extends RecyclerView.Adapter<screen10RVAdaptor.sc
             public void onClick(View view) {
                 Intent intent = new Intent(context, screen11.class);
                 intent.putExtra("name", holder.name.getText().toString());
+                fragment.applicationNotMinimized();
                 context.startActivity(intent);
             }
         });

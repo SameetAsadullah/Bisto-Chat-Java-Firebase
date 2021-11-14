@@ -3,6 +3,7 @@ package com.sameetasadullah.i180479_180531;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Lifecycle;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -11,13 +12,22 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class fragmentsContainer extends AppCompatActivity {
     fragmentAdapter fragmentAdapter;
     ViewPager2 viewPager;
     ImageView callsImage, messagesImage, contactsImage, cameraImage;
+    public boolean minimized = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,5 +110,51 @@ public class fragmentsContainer extends AppCompatActivity {
         fragmentAdapter.addFragment(new fragment_screen6(), "Fragment_Screen6");
         fragmentAdapter.addFragment(new fragment_screen10(), "Fragment_Screen10");
         viewPager.setAdapter(fragmentAdapter);
+    }
+
+    private void updateUserStatus(String state) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Accounts");
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String saveCurrentDate, saveCurrentTime;
+
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+
+        Calendar calForTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+        saveCurrentTime = currentTime.format(calForTime.getTime());
+
+        reference.child(auth.getUid()).child("state").setValue(state);
+        reference.child(auth.getUid()).child("lastSeenTime").setValue(saveCurrentTime);
+        reference.child(auth.getUid()).child("lastSeenDate").setValue(saveCurrentDate);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        updateUserStatus("online");
+        minimized = true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUserStatus("online");
+        minimized = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (minimized) {
+            updateUserStatus("offline");
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        updateUserStatus("offline");
     }
 }

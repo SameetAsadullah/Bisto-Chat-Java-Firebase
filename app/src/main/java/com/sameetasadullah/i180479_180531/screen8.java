@@ -18,7 +18,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class screen8 extends AppCompatActivity {
@@ -59,6 +65,8 @@ public class screen8 extends AppCompatActivity {
         rv.setLayoutManager(lm);
         rv.setAdapter(adapter);
         rv.addItemDecoration(new VerticalSpaceItemDecoration(50));
+
+        updateUserStatus("online");
     }
 
     public void Restart(View v){
@@ -78,5 +86,47 @@ public class screen8 extends AppCompatActivity {
         if (data == null) {
             this.finish();
         }
+    }
+
+    private void updateUserStatus(String state) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Accounts");
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String saveCurrentDate, saveCurrentTime;
+
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+
+        Calendar calForTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+        saveCurrentTime = currentTime.format(calForTime.getTime());
+
+        reference.child(auth.getUid()).child("state").setValue(state);
+        reference.child(auth.getUid()).child("lastSeenTime").setValue(saveCurrentTime);
+        reference.child(auth.getUid()).child("lastSeenDate").setValue(saveCurrentDate);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        updateUserStatus("online");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUserStatus("online");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        updateUserStatus("offline");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        updateUserStatus("offline");
     }
 }

@@ -40,9 +40,12 @@ public class screen4RVAdaptor extends RecyclerView.Adapter<screen4RVAdaptor.scre
         holder.time.setText(chatList.get(position).getTime());
         Picasso.get().load(chatList.get(position).getDp()).into(holder.dp);
 
-        if (chatList.get(position).getOnline()) {
+        if (chatList.get(position).getState().equals("online")) {
             holder.online_status.setAlpha((float)1);
+        } else {
+            holder.online_status.setAlpha((float)0);
         }
+
         if (!chatList.get(position).getRead()) {
             holder.read_status.setAlpha((float)1);
         }
@@ -53,9 +56,6 @@ public class screen4RVAdaptor extends RecyclerView.Adapter<screen4RVAdaptor.scre
                 Intent intent = new Intent(context, screen5.class);
                 intent.putExtra("name", holder.name.getText().toString());
                 intent.putExtra("receiverID", chatList.get(holder.getAdapterPosition()).getId());
-                if (chatList.get(holder.getAdapterPosition()).getOnline()) {
-                    intent.putExtra("onlineStatus", 1);
-                }
                 context.startActivity(intent);
             }
         });
