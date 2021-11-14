@@ -21,6 +21,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +35,8 @@ public class fragment_screen6 extends Fragment {
     screen6RVAdaptor adaptor;
     List<contact> contactList;
     RelativeLayout newContact, newGroup;
+    List<Account> accounts;
+    DatabaseReference myRef;
 
     @Nullable
     @Override
@@ -38,9 +46,40 @@ public class fragment_screen6 extends Fragment {
         recyclerView = view.findViewById(R.id.rv_contacts);
         newContact = view.findViewById(R.id.rl_new_contact);
         newGroup = view.findViewById(R.id.rl_new_group);
+        accounts = new ArrayList<>();
+        myRef = FirebaseDatabase.getInstance().getReference("Accounts");
 
         contactList = new ArrayList<>();
-        addPhoneContactsToList();
+
+        myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                accounts.add(snapshot.getValue(Account.class));
+                contactList.clear();
+                addPhoneContactsToList();
+                adaptor.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -86,7 +125,12 @@ public class fragment_screen6 extends Fragment {
                     while (pCur.moveToNext()) {
                         index = pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
                         String phoneNo = pCur.getString(index);
-                        contactList.add(new contact(name, phoneNo));
+                        for (int i = 0; i < accounts.size(); ++i) {
+                            if (accounts.get(i).getPhoneNumber().equals(phoneNo)) {
+                                contactList.add(new contact(name, phoneNo));
+                                break;
+                            }
+                        }
                     }
                     pCur.close();
                 }
@@ -96,8 +140,7 @@ public class fragment_screen6 extends Fragment {
             cur.close();
         }
     }
-
-
+    
     @Override
     public void onResume() {
         super.onResume();

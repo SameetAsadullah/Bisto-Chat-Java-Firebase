@@ -47,9 +47,7 @@ public class fragmentsContainer extends AppCompatActivity {
         });
         callsImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                viewPager.setCurrentItem(2);
-            }
+            public void onClick(View view) { viewPager.setCurrentItem(2); }
         });
         cameraImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +56,10 @@ public class fragmentsContainer extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void changeViewPager(int fragment) {
+        viewPager.setCurrentItem(fragment);
     }
 
     private void changeImageColorToDefault(int item) {
