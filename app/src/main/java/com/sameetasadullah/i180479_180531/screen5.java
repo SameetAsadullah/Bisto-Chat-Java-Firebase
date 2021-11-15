@@ -9,21 +9,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,12 +47,16 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.OffsetTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class screen5 extends ScreenshotDetectionActivity {
     ImageView backButton, makeCall, cameraImage;
@@ -61,7 +71,13 @@ public class screen5 extends ScreenshotDetectionActivity {
     String receiverID;
     FirebaseAuth mAuth;
     StorageReference storageReference;
+    StorageReference VoicestorageReference;
     Account receiverAccount;
+    CircleImageView record_icon;
+    MediaRecorder recorder;
+    ProgressDialog progress;
+    String fileName = null;
+    private  static  final String LOG_TAG = "Record_Log";
     boolean minimized = true;
 
     @Override
@@ -69,6 +85,10 @@ public class screen5 extends ScreenshotDetectionActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen5);
 
+        fileName = Environment.getExternalStorageDirectory().getAbsolutePath();
+        fileName +="/recorded_audio.3gp";
+        progress = new ProgressDialog(this);
+        record_icon =(CircleImageView)findViewById(R.id.record_icon);
         backButton = findViewById(R.id.back_button);
         makeCall = findViewById(R.id.make_call);
         recyclerView = findViewById(R.id.rv_messages);
@@ -81,7 +101,38 @@ public class screen5 extends ScreenshotDetectionActivity {
         myRef1 = database.getReference("Accounts");
         mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("Images");
+        VoicestorageReference = FirebaseStorage.getInstance().getReference();
         messageList = new ArrayList<>();
+
+        //For Record VOice
+        record_icon.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    //If User Presses button
+                    progress.setMessage("Recording Audio");
+                    progress.show();
+                    startRecording();
+                    progress.dismiss();
+
+                    //Can add a counter
+                  //  Toast.makeText(this, "Recording Started", Toast.LENGTH_SHORT).show();
+                }
+                else if (motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    //IF he stops it
+                    progress.setMessage("Stopped Recording");
+                    progress.show();
+                    stopRecording();
+                    progress.dismiss();
+                    //Toast.makeText(this, "Recording Stoped", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
+
+
+
+        //----------//
 
         Intent intent = getIntent();
         name.setText(intent.getStringExtra("name"));
@@ -332,5 +383,44 @@ public class screen5 extends ScreenshotDetectionActivity {
         if (minimized) {
             updateUserStatus("offline");
         }
+    }
+
+    //Voice Record Code
+
+    private void startRecording() {
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFile(fileName);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        try {
+            recorder.prepare();
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "prepare() failed");
+        }
+
+        recorder.start();
+    }
+
+    private void stopRecording() {
+        recorder.stop();
+        recorder.release();
+        recorder = null;
+        uploadVoiceMessage();
+    }
+
+    private void uploadVoiceMessage() {
+        progress.setMessage("Uploading Audio");
+        progress.show();
+          StorageReference filepath = VoicestorageReference.child("AudioMessages").child("new_audio.3gp");
+          Uri uri = Uri.fromFile(new File(fileName));
+          filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+              @Override
+              public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                  progress.dismiss();
+
+              }
+          });
     }
 }
