@@ -18,21 +18,36 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     List<message> messageList;
     FirebaseAuth mAuth;
+    String receiverDP;
+    DatabaseReference reference;
 
     public screen5RVAdaptor(Context context, List<message> messageList) {
         this.context = context;
         this.messageList = messageList;
         mAuth = FirebaseAuth.getInstance();
+        reference = FirebaseDatabase.getInstance().getReference("Messages");
+    }
+
+    public String getReceiverDP() {
+        return receiverDP;
+    }
+
+    public void setReceiverDP(String receiverDP) {
+        this.receiverDP = receiverDP;
     }
 
     @NonNull
@@ -80,28 +95,14 @@ public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
                     builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            DBHelper dbHelper = new DBHelper(context);
-                            SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-                            sqLiteDatabase.delete(chatsContract.Chats.TABLENAME,
-                                    chatsContract.Chats._ID+"= ?",
-                                    new String[]{messageList.get(holder.getAdapterPosition()).getKey()});
-                            messageList.remove(holder.getAdapterPosition());
-                            notifyDataSetChanged();
+                            reference.child(messageList.get(holder.getAdapterPosition()).getKey()).removeValue();
                         }
                     });
                     builder.setNegativeButton("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String text = input.getText().toString();
-                            DBHelper dbHelper = new DBHelper(context);
-                            SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-                            ContentValues cv = new ContentValues();
-                            cv.put(chatsContract.Chats._MESSAGE, text);
-                            sqLiteDatabase.update(chatsContract.Chats.TABLENAME, cv,
-                                    chatsContract.Chats._ID+"= ?",
-                                    new String[]{messageList.get(holder.getAdapterPosition()).getKey()});
-                            messageList.get(holder.getAdapterPosition()).setMessage(text);
-                            notifyDataSetChanged();
+                            reference.child(messageList.get(holder.getAdapterPosition()).getKey()).child("message").setValue(text);
                         }
                     });
                     builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
@@ -119,6 +120,7 @@ public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
         else if (holder instanceof screen5ReceiveMessageViewHolder) {
             ((screen5ReceiveMessageViewHolder)holder).message.setText(messageList.get(position).getMessage());
             ((screen5ReceiveMessageViewHolder)holder).time.setText(messageList.get(position).getTime());
+            Picasso.get().load(receiverDP).into(((screen5ReceiveMessageViewHolder)holder).dp);
         }
         else if (holder instanceof screen5SendImageViewHolder) {
             ((screen5SendImageViewHolder)holder).time.setText(messageList.get(position).getTime());
@@ -129,6 +131,7 @@ public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((screen5ReceiveImageViewHolder)holder).time.setText(messageList.get(position).getTime());
             ((screen5ReceiveImageViewHolder)holder).location.setText(messageList.get(position).getLocation());
             Picasso.get().load(messageList.get(position).getImage()).into(((screen5ReceiveImageViewHolder)holder).image);
+            Picasso.get().load(receiverDP).into(((screen5ReceiveImageViewHolder)holder).dp);
         }
     }
 
@@ -182,12 +185,14 @@ public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
     class screen5ReceiveMessageViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout relativeLayout;
         TextView message, time;
+        CircleImageView dp;
 
         public screen5ReceiveMessageViewHolder(@NonNull View itemView) {
             super(itemView);
             relativeLayout = itemView.findViewById(R.id.rl_receive_message);
             message = itemView.findViewById(R.id.message);
             time = itemView.findViewById(R.id.time);
+            dp = itemView.findViewById(R.id.dp);
         }
     }
 
@@ -195,6 +200,7 @@ public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView time, location;
         RelativeLayout relativeLayout;
         ImageView image;
+        CircleImageView dp;
 
         public screen5ReceiveImageViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -202,6 +208,7 @@ public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
             location = itemView.findViewById(R.id.location);
             relativeLayout = itemView.findViewById(R.id.rl_receive_image);
             image = itemView.findViewById(R.id.image);
+            dp = itemView.findViewById(R.id.dp);
         }
     }
 }

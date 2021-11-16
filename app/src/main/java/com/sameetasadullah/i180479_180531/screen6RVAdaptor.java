@@ -21,9 +21,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class screen6RVAdaptor extends RecyclerView.Adapter<screen6RVAdaptor.screen6ViewHolder> {
     Context context;
@@ -79,7 +82,7 @@ public class screen6RVAdaptor extends RecyclerView.Adapter<screen6RVAdaptor.scre
     public void onBindViewHolder(@NonNull screen6ViewHolder holder, int position) {
         holder.name.setText(contactList.get(position).getName());
         holder.number.setText(contactList.get(position).getNumber());
-
+        Picasso.get().load(contactList.get(position).getDp()).into(holder.dp);
         holder.rl_contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,12 +107,14 @@ public class screen6RVAdaptor extends RecyclerView.Adapter<screen6RVAdaptor.scre
     public class screen6ViewHolder extends RecyclerView.ViewHolder{
         TextView name, number;
         RelativeLayout rl_contact;
+        CircleImageView dp;
 
         public screen6ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
             number = itemView.findViewById(R.id.number);
             rl_contact = itemView.findViewById(R.id.rl_contact);
+            dp = itemView.findViewById(R.id.dp);
         }
     }
 }

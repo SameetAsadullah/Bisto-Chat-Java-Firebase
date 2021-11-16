@@ -29,9 +29,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="42dp"
             android:layout_toEndOf="@+id/dp"
-            android:text="Hannah Lu"
             android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:id="@+id/name"/>
 
         <TextView
             android:layout_width="wrap_content"
