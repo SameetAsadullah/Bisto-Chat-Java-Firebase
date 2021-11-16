@@ -14,8 +14,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 import java.util.zip.Inflater;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class screen8RVAdapter extends RecyclerView.Adapter<screen8RVAdapter.screen8ViewHolder> {
     List<Recent_Contact> ls;
@@ -41,14 +45,16 @@ public class screen8RVAdapter extends RecyclerView.Adapter<screen8RVAdapter.scre
     @Override
     public void onBindViewHolder(@NonNull screen8ViewHolder holder, int position) {
         holder.name.setText(ls.get(position).getName());
-
+        Picasso.get().load(ls.get(position).getDp()).into(holder.dp);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(c, screen5.class);
                 intent.putExtra("image", image);
                 intent.putExtra("name", holder.name.getText().toString());
+                intent.putExtra("receiverID", ls.get(holder.getAdapterPosition()).getID());
                 c.startActivity(intent);
+                ((screen8)c).minimized = false;
                 ((Activity)c).finish();
             }
         });
@@ -62,10 +68,13 @@ public class screen8RVAdapter extends RecyclerView.Adapter<screen8RVAdapter.scre
     public class screen8ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         RelativeLayout relativeLayout;
+        CircleImageView dp;
+
         public screen8ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
             relativeLayout = itemView.findViewById(R.id.rl_contact);
+            dp = itemView.findViewById(R.id.dp);
         }
     }
 }

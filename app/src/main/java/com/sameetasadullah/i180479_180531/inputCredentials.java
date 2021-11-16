@@ -72,10 +72,9 @@ public class inputCredentials extends AppCompatActivity {
 
                 if (firstName.getText().toString().equals("") ||
                         lastName.getText().toString().equals("") ||
-                        radioButtonID == -1 ||
-                        bio.getText().toString().equals("")) {
+                        radioButtonID == -1) {
                     Toast.makeText(inputCredentials.this,
-                            "Please fill all the input fields", Toast.LENGTH_LONG).show();
+                            "Please fill all the necessary input fields", Toast.LENGTH_LONG).show();
                 }
                 else if (imageURI == null) {
                     Toast.makeText(inputCredentials.this,

@@ -63,7 +63,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/screen6_dp"
-        android:layout_alignBottom="@id/rl_receive_message"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_alignBottom="@+id/rl_receive_image"
+        android:id="@+id/dp"/>
 
 </RelativeLayout>

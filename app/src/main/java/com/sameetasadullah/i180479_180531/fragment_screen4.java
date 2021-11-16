@@ -16,9 +16,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +44,7 @@ public class fragment_screen4 extends Fragment {
     DatabaseReference myRef, myRef1;
     FirebaseAuth mAuth;
     List<Account> accounts;
+    EditText searchEditText;
 
     @Nullable
     @Override
@@ -49,6 +53,7 @@ public class fragment_screen4 extends Fragment {
 
         recyclerView = view.findViewById(R.id.rv_chats);
         newMessage = view.findViewById(R.id.new_message);
+        searchEditText = view.findViewById(R.id.search_edit_text);
         myRef = FirebaseDatabase.getInstance().getReference("Messages");
         myRef1 = FirebaseDatabase.getInstance().getReference("Accounts");
         mAuth = FirebaseAuth.getInstance();
@@ -84,7 +89,6 @@ public class fragment_screen4 extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
             }
 
             @Override
@@ -164,7 +168,7 @@ public class fragment_screen4 extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                
             }
 
             @Override
@@ -180,7 +184,7 @@ public class fragment_screen4 extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        rvAdaptor = new screen4RVAdaptor(getActivity(), chatList);
+        rvAdaptor = new screen4RVAdaptor(getActivity(), chatList, fragment_screen4.this);
         recyclerView.setAdapter(rvAdaptor);
         recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(70));
 
@@ -188,6 +192,23 @@ public class fragment_screen4 extends Fragment {
             @Override
             public void onClick(View v) {
                 ((fragmentsContainer)getActivity()).changeViewPager(1);
+            }
+        });
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                rvAdaptor.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -199,4 +220,8 @@ public class fragment_screen4 extends Fragment {
         super.onResume();
         ((fragmentsContainer)getActivity()).changeImageColorToBlue(0);
      }
+
+    public void applicationNotMinimized() {
+        ((fragmentsContainer)getActivity()).minimized = false;
+    }
 }

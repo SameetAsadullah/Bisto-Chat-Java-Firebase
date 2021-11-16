@@ -96,6 +96,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rl_login_button"
@@ -104,8 +105,12 @@
                 android:text="REGISTER NOW"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:id="@+id/register"/>
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_below="@+id/register"/>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

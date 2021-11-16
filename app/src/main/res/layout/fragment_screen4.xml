@@ -19,34 +19,41 @@
         android:layout_weight="1.2">
 
         <ImageView
+            android:id="@+id/new_message"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginBottom="25dp"
+            android:layout_centerVertical="true"
             android:background="@drawable/new_message_icon"
-            android:backgroundTint="#696969"
-            android:id="@+id/new_message"/>
+            android:backgroundTint="#696969" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="21dp"
-            android:background="@drawable/search_icon" />
+            android:layout_centerInParent="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1 new message"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="23dp"/>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/search_icon"
+                android:id="@+id/search_icon"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/search_icon"
+                android:background="@null"
+                android:hint="Search"
+                android:textColorHint="#696969"
+                android:textColor="#696969"
+                android:id="@+id/search_edit_text"/>
+        </RelativeLayout>
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

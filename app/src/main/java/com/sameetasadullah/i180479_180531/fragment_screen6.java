@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,11 +28,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class fragment_screen6 extends Fragment {
     RecyclerView recyclerView;
@@ -41,6 +47,8 @@ public class fragment_screen6 extends Fragment {
     List<Account> accounts;
     DatabaseReference myRef;
     FirebaseAuth mAuth;
+    CircleImageView dp;
+    TextView name;
 
     @Nullable
     @Override
@@ -53,16 +61,24 @@ public class fragment_screen6 extends Fragment {
         accounts = new ArrayList<>();
         myRef = FirebaseDatabase.getInstance().getReference("Accounts");
         mAuth = FirebaseAuth.getInstance();
+        dp = view.findViewById(R.id.dp);
+        name = view.findViewById(R.id.name);
 
         contactList = new ArrayList<>();
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                accounts.add(snapshot.getValue(Account.class));
+                Account firebaseAccount = snapshot.getValue(Account.class);
+                accounts.add(firebaseAccount);
                 contactList.clear();
                 addPhoneContactsToList();
                 adaptor.notifyDataSetChanged();
+
+                if (firebaseAccount.getID().equals(mAuth.getUid())) {
+                    name.setText(firebaseAccount.getFirstName() + " " + firebaseAccount.getLastName());
+                    Picasso.get().load(firebaseAccount.getDp()).into(dp);
+                }
             }
 
             @Override
@@ -125,7 +141,7 @@ public class fragment_screen6 extends Fragment {
             for (int i = 0; i < accounts.size(); ++i) {
                 if (accounts.get(i).getPhoneNumber().equals(phoneNo) && !accounts.get(i).getID().equals(mAuth.getUid())) {
                     contactList.add(new contact(accounts.get(i).getFirstName() + " " +
-                            accounts.get(i).getLastName(), phoneNo));
+                            accounts.get(i).getLastName(), phoneNo, accounts.get(i).getDp()));
                     break;
                 }
             }

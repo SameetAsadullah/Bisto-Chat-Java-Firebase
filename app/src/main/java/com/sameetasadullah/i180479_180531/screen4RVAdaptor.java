@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,17 +15,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class screen4RVAdaptor extends RecyclerView.Adapter<screen4RVAdaptor.screen4ViewHolder> {
+public class screen4RVAdaptor extends RecyclerView.Adapter<screen4RVAdaptor.screen4ViewHolder> implements Filterable {
     Context context;
     List<chat> chatList;
+    List<chat> filteredList;
+    fragment_screen4 fragment;
 
-    public screen4RVAdaptor(Context context, List<chat> chatList) {
+    public screen4RVAdaptor(Context context, List<chat> chatList, fragment_screen4 fragment) {
         this.context = context;
         this.chatList = chatList;
+        this.filteredList = chatList;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -35,18 +42,18 @@ public class screen4RVAdaptor extends RecyclerView.Adapter<screen4RVAdaptor.scre
 
     @Override
     public void onBindViewHolder(@NonNull screen4RVAdaptor.screen4ViewHolder holder, int position) {
-        holder.name.setText(chatList.get(position).getName());
-        holder.message.setText(chatList.get(position).getMessage());
-        holder.time.setText(chatList.get(position).getTime());
-        Picasso.get().load(chatList.get(position).getDp()).into(holder.dp);
+        holder.name.setText(filteredList.get(position).getName());
+        holder.message.setText(filteredList.get(position).getMessage());
+        holder.time.setText(filteredList.get(position).getTime());
+        Picasso.get().load(filteredList.get(position).getDp()).into(holder.dp);
 
-        if (chatList.get(position).getState().equals("online")) {
+        if (filteredList.get(position).getState().equals("online")) {
             holder.online_status.setAlpha((float)1);
         } else {
             holder.online_status.setAlpha((float)0);
         }
 
-        if (!chatList.get(position).getRead()) {
+        if (!filteredList.get(position).getRead()) {
             holder.read_status.setAlpha((float)1);
         }
 
@@ -55,15 +62,49 @@ public class screen4RVAdaptor extends RecyclerView.Adapter<screen4RVAdaptor.scre
             public void onClick(View view) {
                 Intent intent = new Intent(context, screen5.class);
                 intent.putExtra("name", holder.name.getText().toString());
-                intent.putExtra("receiverID", chatList.get(holder.getAdapterPosition()).getId());
+                intent.putExtra("receiverID", filteredList.get(holder.getAdapterPosition()).getId());
+                fragment.applicationNotMinimized();
                 context.startActivity(intent);
             }
         });
     }
 
+
+
     @Override
     public int getItemCount() {
-        return chatList.size();
+        return filteredList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String Key = constraint.toString();
+                if(Key.isEmpty()){
+                    filteredList = chatList;
+                }
+                else{
+                    List<chat> listFiltered = new ArrayList<>();
+                    for (chat row: chatList){
+                        if(row.getName().toLowerCase().contains(Key.toLowerCase())){
+                            listFiltered.add(row);
+                        }
+                    }
+                    filteredList = listFiltered;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredList =  (List<chat>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class screen4ViewHolder extends RecyclerView.ViewHolder{
