@@ -21,6 +21,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -43,6 +45,8 @@ public class screen6RVAdaptor extends RecyclerView.Adapter<screen6RVAdaptor.scre
         database = FirebaseDatabase.getInstance();
         accounts = new ArrayList<>();
         myRef = database.getReference("Accounts");
+        myRef.keepSynced(true);
+
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -83,6 +87,7 @@ public class screen6RVAdaptor extends RecyclerView.Adapter<screen6RVAdaptor.scre
         holder.name.setText(contactList.get(position).getName());
         holder.number.setText(contactList.get(position).getNumber());
         Picasso.get().load(contactList.get(position).getDp()).into(holder.dp);
+
         holder.rl_contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

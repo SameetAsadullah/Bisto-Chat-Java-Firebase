@@ -65,6 +65,7 @@ public class screen8 extends AppCompatActivity {
         ls = new ArrayList<>();
         accounts = new ArrayList<>();
         myRef = FirebaseDatabase.getInstance().getReference("Accounts");
+        myRef.keepSynced(true);
         mAuth = FirebaseAuth.getInstance();
 
         myRef.addChildEventListener(new ChildEventListener() {

@@ -58,6 +58,7 @@ public class inputCredentials extends AppCompatActivity {
         phoneNumber = findViewById(R.id.phoneNumber);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Accounts");
+        myRef.keepSynced(true);
         storageReference = FirebaseStorage.getInstance().getReference("DPs");
 
         Intent intent = getIntent();

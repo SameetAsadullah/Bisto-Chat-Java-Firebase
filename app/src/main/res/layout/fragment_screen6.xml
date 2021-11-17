@@ -21,7 +21,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/screen6_dp" />
+            android:src="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"

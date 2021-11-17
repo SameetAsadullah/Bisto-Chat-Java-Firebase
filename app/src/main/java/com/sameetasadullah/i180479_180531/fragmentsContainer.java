@@ -114,6 +114,7 @@ public class fragmentsContainer extends AppCompatActivity {
 
     private void updateUserStatus(String state) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Accounts");
+        reference.keepSynced(true);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String saveCurrentDate, saveCurrentTime;
 
