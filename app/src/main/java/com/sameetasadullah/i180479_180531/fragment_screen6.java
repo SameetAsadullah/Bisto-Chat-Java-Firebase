@@ -60,6 +60,7 @@ public class fragment_screen6 extends Fragment {
         newGroup = view.findViewById(R.id.rl_new_group);
         accounts = new ArrayList<>();
         myRef = FirebaseDatabase.getInstance().getReference("Accounts");
+        myRef.keepSynced(true);
         mAuth = FirebaseAuth.getInstance();
         dp = view.findViewById(R.id.dp);
         name = view.findViewById(R.id.name);

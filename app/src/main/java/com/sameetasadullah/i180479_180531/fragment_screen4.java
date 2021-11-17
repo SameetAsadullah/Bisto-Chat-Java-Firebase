@@ -55,7 +55,9 @@ public class fragment_screen4 extends Fragment {
         newMessage = view.findViewById(R.id.new_message);
         searchEditText = view.findViewById(R.id.search_edit_text);
         myRef = FirebaseDatabase.getInstance().getReference("Messages");
+        myRef.keepSynced(true);
         myRef1 = FirebaseDatabase.getInstance().getReference("Accounts");
+        myRef1.keepSynced(true);
         mAuth = FirebaseAuth.getInstance();
         accounts = new ArrayList<>();
 

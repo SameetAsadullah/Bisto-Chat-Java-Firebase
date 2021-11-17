@@ -57,7 +57,7 @@ public class screen5 extends ScreenshotDetectionActivity {
     ImageView backButton, makeCall, cameraImage;
     RecyclerView recyclerView;
     screen5RVAdaptor adaptor;
-    List<message> messageList;
+    List<com.sameetasadullah.i180479_180531.message> messageList;
     TextView name, onlineStatus;
     EditText message;
     Bitmap image = null;
@@ -83,7 +83,9 @@ public class screen5 extends ScreenshotDetectionActivity {
         cameraImage = findViewById(R.id.camera_image);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Messages");
+        myRef.keepSynced(true);
         myRef1 = database.getReference("Accounts");
+        myRef1.keepSynced(true);
         mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("Images");
         messageList = new ArrayList<>();

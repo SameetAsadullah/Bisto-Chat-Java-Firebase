@@ -40,6 +40,7 @@ public class screen5RVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.messageList = messageList;
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("Messages");
+        reference.keepSynced(true);
     }
 
     public String getReceiverDP() {
