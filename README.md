@@ -21,7 +21,23 @@ An `Android Chatting Application` coded in `Java Language` using `Android Studio
 
 ### Working Screenshots
 <div align="center">
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/main/extras/splash-screen-ss.png" alt = "" width="200px"/>
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/splash-screen-ss.png" alt = "" width="200px"/>
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/login-ss.png" alt = "" width="200px"/>
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/signup-ss.png" alt = "" width="200px"/>
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/create-profile-ss.png" alt = "" width="200px"/>
+</div>
+<br/>
+<div align="center">
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/contacts-ss.png" alt = "" width="200px"/>
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/chat-ss.png" alt = "" width="200px"/>
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/chats-ss.png" alt = "" width="200px"/>
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/chats-ss-1.png" alt = "" width="200px"/>
+</div>
+<br/>
+<div align="center">
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/chat-ss-1.png" alt = "" width="200px"/>
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/edit-delete-message-ss.png" alt = "" width="200px"/>
+  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/edited-message-ss.png" alt = "" width="200px"/>
 </div>
   
 ### Contributors
