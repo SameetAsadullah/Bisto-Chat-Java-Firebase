@@ -1,1 +1,2 @@
-# Assignment-3
+# Bisto-Chat-Android-Chatting-Application
+An Android Chatting Application coded in Java language using Android Studio. Backend is implemented in PHP Language. Users can send messages, delete messages, edit messages, send images, and set their profile pictures. It works just like whatsapp i.e, detects user accounts using their phone numbers. All the phone contacts get automatically synced when you open the application.
