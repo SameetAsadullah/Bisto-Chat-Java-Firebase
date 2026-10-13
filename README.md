@@ -4,7 +4,7 @@ A Java Android messaging application backed by Firebase Authentication, Realtime
 
 ![Android](https://img.shields.io/badge/Android-Java-3DDC84?logo=android&logoColor=white)
 ![Firebase](https://img.shields.io/badge/backend-Firebase-FFCA28?logo=firebase&logoColor=black)
-![Checks](https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/actions/workflows/android.yml/badge.svg?branch=master)
+![Checks](https://github.com/SameetAsadullah/bisto-chat-firebase/actions/workflows/android.yml/badge.svg?branch=master)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 ## Features
