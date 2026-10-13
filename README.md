@@ -32,14 +32,14 @@ See [Architecture](docs/ARCHITECTURE.md) for the client structure and Firebase r
 
 ## Run locally
 
-1. Open the `src` directory in Android Studio.
+1. Open the repository root in Android Studio.
 2. Create a Firebase project and register an Android app with package name `com.sameetasadullah.i180479_180531`.
 3. Enable Email/Password authentication, Realtime Database, and Storage.
-4. Download your Firebase `google-services.json` into `src/app`.
+4. Download your Firebase `google-services.json` into `app/`.
 5. Configure appropriate Firebase Security Rules for your development environment.
 6. Build and run on an Android device or emulator running API 26 or newer.
 
-`google-services.json` is deliberately excluded from version control. [`google-services.example.json`](src/app/google-services.example.json) documents the expected structure without containing a live Firebase project configuration.
+`google-services.json` is deliberately excluded from version control. [`google-services.example.json`](app/google-services.example.json) documents the expected structure without containing a live Firebase project configuration.
 
 ## Screenshots
 

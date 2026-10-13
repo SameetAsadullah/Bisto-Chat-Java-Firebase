@@ -5,5 +5,5 @@ local.properties
 *.iml
 *.apk
 *.aab
-src/app/google-services.json
+app/google-services.json
 .DS_Store
