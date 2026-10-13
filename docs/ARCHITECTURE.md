@@ -22,4 +22,4 @@ The client also observes screenshots during a conversation and can publish the c
 
 ## Historical scope
 
-This is an academic Android project from 2021 and retains its original dependency versions and data model. Before production use, the data model should avoid duplicating authentication passwords, Firebase Security Rules should enforce per-user access, and current Android privacy/storage APIs should replace the legacy permission flow.
+This repository retains the original 2021 dependency versions and data model. Before production use, the data model should avoid duplicating authentication passwords, Firebase Security Rules should enforce per-user access, and current Android privacy/storage APIs should replace the legacy permission flow.

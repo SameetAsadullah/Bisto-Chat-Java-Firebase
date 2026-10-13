@@ -53,7 +53,7 @@ See [Architecture](docs/ARCHITECTURE.md) for the client structure and Firebase r
 
 ## Project status
 
-This repository preserves an academic Android project and its original implementation. The dependencies and privacy model reflect its 2021 coursework context. Before production deployment, remove password duplication from profile records, review Firebase rules, modernize Android storage handling, and update dependencies.
+This repository preserves the original 2021 Android implementation. Before production deployment, remove password duplication from profile records, review Firebase rules, modernize Android storage handling, and update dependencies.
 
 ## Contributors
 
