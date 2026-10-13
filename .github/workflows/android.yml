@@ -1,0 +1,35 @@
+name: Android checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "11"
+          cache: gradle
+
+      - name: Prepare example Firebase configuration
+        run: cp app/google-services.example.json app/google-services.json
+
+      - name: Run unit tests
+        run: ./gradlew test --no-daemon
+
+      - name: Check whitespace
+        working-directory: .
+        run: git diff --check

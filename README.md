@@ -1,45 +1,65 @@
-<h1 align="center">Bisto Chat using Java and Firebase</h1>
+# Bisto Chat — Firebase Android Client
 
-### Description
-An `Android Chatting Application` coded in `Java Language` using `Android Studio`. Backend is implemented using `Firebase`. It works exactly like `WhatsApp` i.e, user accounts get detected by their `Phone Numbers` and `Synced Automatically` with the application. User can then select any contact and start chatting with it.
+A Java Android messaging application backed by Firebase Authentication, Realtime Database, and Storage. Bisto supports user profiles, contact discovery, real-time text and image conversations, message editing/deletion, group interfaces, and screenshot-aware chat events.
 
-### Functionalities
-- User can `Login/Signup`.
-- User can set his `Profile Picture`.
-- User can set his `Personal Details`.
-- Users can `Send Text Messages` to eachother.
-- Users can `Send Image Messages` to eachother.
-- Users can `Edit Message` by long pressing it.
-- Users can `Delete Message` by long pressing it.
-- If a user `Takes Screenshot` of the chat, it gets send in the chat automatically.
+![Android](https://img.shields.io/badge/Android-Java-3DDC84?logo=android&logoColor=white)
+![Firebase](https://img.shields.io/badge/backend-Firebase-FFCA28?logo=firebase&logoColor=black)
+![Checks](https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/actions/workflows/android.yml/badge.svg?branch=master)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-### Manual
-1) You must `Run this Project` on Android Studio.
-2) You must `Create an Account` on Firebase.
-3) You must `Create a Project` on your firebase account.
-4) You must `Link Android Studio` to your firebase account by going into `Tools -> Firebase`.
+## Features
 
-### Working Screenshots
-<div align="center">
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/splash-screen-ss.png" alt = "" width="200px"/>
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/login-ss.png" alt = "" width="200px"/>
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/signup-ss.png" alt = "" width="200px"/>
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/create-profile-ss.png" alt = "" width="200px"/>
-</div>
-<br/>
-<div align="center">
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/contacts-ss.png" alt = "" width="200px"/>
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/chat-ss.png" alt = "" width="200px"/>
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/chats-ss.png" alt = "" width="200px"/>
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/chats-ss-1.png" alt = "" width="200px"/>
-</div>
-<br/>
-<div align="center">
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/chat-ss-1.png" alt = "" width="200px"/>
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/edit-delete-message-ss.png" alt = "" width="200px"/>
-  <img src = "https://github.com/SameetAsadullah/Bisto-Chat-Java-Firebase/blob/master/extras/edited-message-ss.png" alt = "" width="200px"/>
-</div>
-  
-### Contributors
+- Email/password registration and sign-in.
+- User profiles with personal details and profile pictures.
+- Contact and recent-conversation views.
+- Real-time text and image messaging.
+- Message editing and deletion through long-press actions.
+- Group-creation interface and call-history screens.
+- Screenshot detection that can publish a captured image to the conversation.
+- Local SQLite support alongside Firebase synchronization.
+
+See [Architecture](docs/ARCHITECTURE.md) for the client structure and Firebase responsibilities.
+
+## Technology
+
+- Java and Android SDK
+- Firebase Authentication
+- Firebase Realtime Database
+- Firebase Storage
+- RecyclerView and Material Components
+- Picasso image loading
+- JUnit and Android instrumentation tests
+
+## Run locally
+
+1. Open the `src` directory in Android Studio.
+2. Create a Firebase project and register an Android app with package name `com.sameetasadullah.i180479_180531`.
+3. Enable Email/Password authentication, Realtime Database, and Storage.
+4. Download your Firebase `google-services.json` into `src/app`.
+5. Configure appropriate Firebase Security Rules for your development environment.
+6. Build and run on an Android device or emulator running API 26 or newer.
+
+`google-services.json` is deliberately excluded from version control. [`google-services.example.json`](src/app/google-services.example.json) documents the expected structure without containing a live Firebase project configuration.
+
+## Screenshots
+
+| Splash | Sign in | Sign up | Profile setup |
+| --- | --- | --- | --- |
+| ![Splash screen](extras/splash-screen-ss.png) | ![Login screen](extras/login-ss.png) | ![Sign-up screen](extras/signup-ss.png) | ![Profile setup](extras/create-profile-ss.png) |
+
+| Contacts | Conversation | Chat list | Message actions |
+| --- | --- | --- | --- |
+| ![Contacts](extras/contacts-ss.png) | ![Conversation](extras/chat-ss.png) | ![Chat list](extras/chats-ss.png) | ![Edit and delete actions](extras/edit-delete-message-ss.png) |
+
+## Project status
+
+This repository preserves an academic Android project and its original implementation. The dependencies and privacy model reflect its 2021 coursework context. Before production deployment, remove password duplication from profile records, review Firebase rules, modernize Android storage handling, and update dependencies.
+
+## Contributors
+
 - [Sameet Asadullah](https://github.com/SameetAsadullah)
 - [Tayyab Ali](https://github.com/DarkDragz)
+
+## License
+
+Licensed under the [MIT License](LICENSE).
