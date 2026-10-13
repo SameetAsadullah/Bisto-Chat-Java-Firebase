@@ -1,0 +1,24 @@
+{
+  "project_info": {
+    "project_number": "000000000000",
+    "firebase_url": "https://your-project-id-default-rtdb.firebaseio.com",
+    "project_id": "your-project-id",
+    "storage_bucket": "your-project-id.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",
+        "android_client_info": {
+          "package_name": "com.sameetasadullah.i180479_180531"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "replace-with-your-firebase-web-api-key"
+        }
+      ]
+    }
+  ],
+  "configuration_version": "1"
+}
